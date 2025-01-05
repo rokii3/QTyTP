@@ -2,6 +2,12 @@ import json
 import re
 from typing import Dict, List
 
+"""
+This script defines the patterns for data collection from NLLB source, target, and alignment file.
+It essentially searches both the source language and target language monolingual corpora files by line index, and appends them to a new json object holding original index for cross reference and the pair of sentence.
+
+For more information about the patterns, see section X in the notebook
+"""
 class QuestionDetector:
     def __init__(self):
         # English question patterns
@@ -65,9 +71,9 @@ class QuestionDetector:
                 
         return False
 
-def extract_question_pairs(source_file: str, target_file: str, language: str, limit: int = 1000) -> Dict:
+def extract_question_pairs(source_file: str, target_file: str, language: str, limit: int = 2000000) -> Dict:
     """
-    Extracts question-translation pairs from source and target language files.
+    Extracts question-translation pairs from source and target language files. The limit can be changed manually for controlling the size of the dataset, i.e. number of lines in the monolingual files to search through.
 
     Args:
         source_file: Path to the source language file.
